@@ -1,0 +1,711 @@
+/* Global Dark Theme */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Navigation Bar */
+.heritage-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo */
+.heritage-logo a {
+    font-size: 24px;
+    font-weight: bold;
+    color: #f5a623;
+    text-decoration: none;
+}
+
+/* Navigation Links */
+.heritage-nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.heritage-nav-links li a {
+    text-decoration: none;
+    color: #ffffff;
+    transition: 0.3s;
+}
+
+.heritage-nav-links li a:hover {
+    color: #f5a623;
+}
+
+/* Search Bar */
+.heritage-search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    padding: 5px;
+    border-radius: 20px;
+    margin-left: auto;      /* Add spacing from the nav items (optional) */
+    margin-right: auto;     /* Add spacing before the profile icon */
+}
+
+.heritage-search-bar {
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-size: 14px;
+    width: 180px;
+}
+
+.heritage-search-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Login Button */
+.heritage-login-btn {
+    background: #f5a623;
+    color: #121212;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.heritage-login-btn:hover {
+    background: #ffcc70;
+}
+
+/* Hero Section */
+.heritage-hero {
+    height: 50vh;
+    background: url('A_dark-themed_heritage_background_featuring_ancien.png') no-repeat center center/cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.heritage-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.heritage-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.heritage-hero-content h1 {
+    font-size: 48px;
+    color: #f5a623;
+}
+
+.heritage-hero-content p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.heritage-explore-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background: #f5a623;
+    color: #121212;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.heritage-explore-btn:hover {
+    background: #ffcc70;
+}
+
+/* Featured Heritage Sections */
+.heritage-content-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+    flex-wrap: wrap;
+}
+
+.heritage-container {
+    width: 30%;
+    background: #1a1a1a;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.heritage-container img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.heritage-caption h3 {
+    color: #f5a623;
+    font-size: 22px;
+}
+
+.heritage-caption p {
+    font-size: 16px;
+}
+
+/* Footer */
+.heritage-footer {
+    text-align: center;
+    padding: 20px;
+    background: #000;
+    margin-top: 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .heritage-nav-links {
+        display: none;
+        flex-direction: column;
+        background: #1a1a1a;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 20px;
+    }
+
+    .heritage-nav-links.active {
+        display: flex;
+    }
+
+    .heritage-hamburger {
+        display: block;
+        font-size: 24px;
+        cursor: pointer;
+        color: #ffffff;
+    }
+
+    .heritage-container {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+}
+
+
+
+
+
+
+
+/* Heritage Section Styling */
+.heritage-content-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 50px 20px;
+}
+
+/* Heritage Containers */
+.heritage-container {
+    width: 300px; /* Fixed width for uniformity */
+    height: 350px; /* Fixed height for uniformity */
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+}
+
+/* Hover Effect */
+.heritage-container:hover {
+    transform: scale(1.05);
+}
+
+/* Image Styling */
+.heritage-container img {
+    width: 100%;
+    height: 200px; /* Fixed height to ensure uniformity */
+    object-fit: cover; /* Ensures images maintain aspect ratio */
+    border-radius: 12px 12px 0 0;
+}
+
+/* Caption Styling */
+.heritage-caption {
+    padding: 15px;
+    background: #1a1a1a;
+    color: white;
+    border-radius: 0 0 12px 12px;
+}
+
+.heritage-caption h3 {
+    font-size: 20px;
+    color: #f5a623;
+    margin-bottom: 5px;
+}
+
+.heritage-caption p {
+    font-size: 14px;
+    color: #ccc;
+}
+
+
+
+
+
+
+
+/* Dark Theme for Hero Section */
+.heritage-hero {
+    position: relative;
+    background: url('images/dynamic.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+}
+
+.heritage-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Dark Overlay */
+}
+
+.heritage-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.heritage-hero h1 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.heritage-hero p {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.heritage-explore-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #ffb400;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.heritage-explore-btn:hover {
+    background: #ffaa00;
+}
+
+/* Dark Theme for Features Section */
+.heritage-features {
+    text-align: center;
+    padding: 60px 20px;
+    background: url('images/features-back-ground.jpg') no-repeat center center/cover;
+    color: #fff;
+}
+
+.heritage-features h2 {
+    font-size: 28px;
+    color: #ffb400;
+    margin-bottom: 30px;
+}
+
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.feature-box {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-box:hover {
+    transform: translateY(-5px);
+    background: #292929;
+}
+
+.feature-box h3 {
+    font-size: 20px;
+    color: #ffb400;
+    margin-bottom: 10px;
+}
+
+.feature-box p {
+    font-size: 14px;
+    color: #ddd;
+}
+
+
+
+
+
+
+
+
+
+
+/* Districts Section Styling */
+.dist-section {
+    background-size: cover;
+    padding: 50px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    margin: 40px auto;
+    max-width: 1200px;
+    color: white;
+}
+
+/* Section Heading */
+.dist-heading {
+    font-size: 2rem;
+    color: #ffffff;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Districts Grid */
+.dist-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Individual District Box */
+.dist-item {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 2px 2px 12px rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, background 0.3s;
+    overflow: hidden;
+}
+
+/* Hover effect */
+.dist-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* District Images */
+.dist-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Form */
+.dist-form {
+    margin-top: 10px;
+}
+
+/* District Button */
+.dist-button {
+    background: linear-gradient(45deg, #ff6600, #ffcc00);
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Button Hover */
+.dist-button:hover {
+    background: linear-gradient(45deg, #ff4500, #ffa500);
+    box-shadow: 0px 0px 12px rgba(255, 102, 0, 0.9);
+}
+
+/* Image styling for district selection */
+.dist-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+
+
+/* Login/Signup Button */
+.login-btn {
+    background: #FFD700;
+    color: #121212;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background: #e6b800;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background: #1a1a1a;
+    color: #ffffff;
+    margin: 15% auto;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.modal-content input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    background: #FFD700;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.modal-content button:hover {
+    background: #e6b800;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Hidden Section (Locked Before Login) */
+.more-details {
+    display: none;
+    text-align: center;
+    padding: 50px;
+    background: #1a1a1a;
+}
+
+
+/* Improved User Profile Styles */
+.user-profile-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 6px 12px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .user-profile-container:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f5a623, #f54123);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .user-name {
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  
+  .profile-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: #2a2a2a;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    padding: 8px 0;
+    width: 200px;
+    z-index: 1000;
+    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .profile-dropdown a {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    color: #eee;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-size: 14px;
+  }
+  
+  /* Remove this: 
+.user-profile-container:hover .profile-dropdown {
+    display: block;
+}
+*/
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: rgb(11, 5, 5);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 10px 0;
+    width: 180px;
+    z-index: 1000;
+}
+
+.profile-dropdown.show {
+    display: block;
+}
+
+  
+  .profile-dropdown a::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+  }
+  
+  .profile-dropdown a:nth-child(1)::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23f5a623"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
+  }
+  
+  .profile-dropdown a:nth-child(2)::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23f5a623"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>');
+  }
+  
+  .profile-dropdown a:nth-child(3)::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23f5a623"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg>');
+  }
+  
+  /* Animation for dropdown */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .user-profile-container:hover .profile-dropdown {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .user-profile-container {
+      padding: 5px 8px;
+      margin-left: 10px;
+    }
+    
+    .user-name {
+      display: none;
+    }
+    
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      font-size: 14px;
+    }
+    
+    .profile-dropdown {
+      width: 180px;
+      right: -10px;
+    }
+  }
+
+
+  #planner-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #FFD700; /* Green */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+  }
+
+  #planner-btn:hover {
+    background-color: #e6b800;
+  }

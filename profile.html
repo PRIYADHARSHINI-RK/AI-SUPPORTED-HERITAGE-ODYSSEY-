@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Heritage Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional profile-specific styles */
+        .profile-page {
+            max-width: 1200px;
+            margin: 80px auto 40px;
+            padding: 0 20px;
+            color: white;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f5a623, #f54123);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(245, 166, 35, 0.3);
+        }
+        
+        .profile-info h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #f5a623;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f5a623;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .profile-section {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #f5a623;
+            border-bottom: 1px solid rgba(245, 166, 35, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .recent-activity {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .activity-card {
+            background: rgba(40, 40, 40, 0.7);
+            border-radius: 8px;
+            padding: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-5px);
+            background: rgba(50, 50, 50, 0.7);
+        }
+        
+        .activity-date {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+        
+        .activity-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .activity-desc {
+            font-size: 14px;
+            color: #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .profile-stats {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (same as index.html) -->
+    <header>
+        <nav class="heritage-navbar">
+            <div class="heritage-logo">
+                <a href="index.html">Heritage Explorer</a>
+            </div>
+            
+            <ul class="heritage-nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explore.html">Explore</a></li>
+                <li><a href="#dist-section">Destinations</a></li>
+                <li><a href="#heritage-features">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="heritage-search-container">
+                <input type="text" placeholder="🔍 Search..." class="heritage-search-bar">
+                <button class="heritage-voice-btn" onclick="startVoiceSearch()">🎙️</button>
+            </div>
+            
+            <div class="user-profile-container" id="userProfileContainer">
+                <div class="user-avatar" id="userAvatar"></div>
+                <span class="user-name" id="userName"></span>
+                <div class="profile-dropdown">
+                    <a href="profile.html">My Profile</a>
+                    <a href="bookmarks.html">Saved Places</a>
+                    <a href="#" onclick="logout()">Log Out</a>
+                </div>
+            </div>
+            
+            <button class="login-btn" id="loginButton" onclick="openModal()">Log In / Sign Up</button>
+            <div class="heritage-hamburger" onclick="toggleMenu()">☰</div>
+        </nav>
+    </header>
+
+    <!-- Profile Content -->
+    <main class="profile-page">
+        <div class="profile-header">
+            <div class="profile-avatar" id="profileAvatarLarge"></div>
+            <div class="profile-info">
+                <h1 id="profileName"></h1>
+                <p id="profileEmail"></p>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="sitesVisited">0</div>
+                        <div class="stat-label">Sites Visited</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="reviewsPosted">0</div>
+                        <div class="stat-label">Reviews</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="badgesEarned">0</div>
+                        <div class="stat-label">Badges</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-section">
+            <h2 class="section-title">About Me</h2>
+            <p id="profileBio">No bio added yet. <a href="#" onclick="editBio()">Add a bio</a> to tell others about your heritage exploration journey.</p>
+        </div>
+        
+        <div class="profile-section">
+            <h2 class="section-title">Recent Activity</h2>
+            <div class="recent-activity" id="recentActivity">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="profile-section">
+            <h2 class="section-title">Preferences</h2>
+            <div class="preference-item">
+                <label>Preferred Language:</label>
+                <select id="languagePreference">
+                    <option value="en">English</option>
+                    <option value="ta">Tamil</option>
+                    <option value="hi">Hindi</option>
+                </select>
+            </div>
+            <button class="heritage-explore-btn" style="margin-top: 15px;" onclick="savePreferences()">Save Preferences</button>
+        </div>
+    </main>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="heritage-footer">
+        <p>&copy; 2025 Heritage Explorer | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Profile page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Set profile data
+            document.getElementById('profileName').textContent = user.name;
+            document.getElementById('profileEmail').textContent = user.email;
+            
+            // Set avatar
+            const initials = user.name.split(' ')
+                .filter(word => word.length > 0)
+                .map(word => word[0])
+                .join('')
+                .toUpperCase()
+                .substring(0, 2);
+            document.getElementById('profileAvatarLarge').textContent = initials;
+            
+            // Load additional profile data
+            loadProfileData();
+        });
+        
+        async function loadProfileData() {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch('/api/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    // Update stats
+                    document.getElementById('sitesVisited').textContent = data.sitesVisited || 0;
+                    document.getElementById('reviewsPosted').textContent = data.reviews || 0;
+                    document.getElementById('badgesEarned').textContent = data.badges || 0;
+                    
+                    // Update bio if exists
+                    if (data.bio) {
+                        document.getElementById('profileBio').textContent = data.bio;
+                    }
+                    
+                    // Populate recent activity
+                    if (data.recentActivity && data.recentActivity.length > 0) {
+                        const activityContainer = document.getElementById('recentActivity');
+                        activityContainer.innerHTML = data.recentActivity.map(activity => `
+                            <div class="activity-card">
+                                <div class="activity-date">${new Date(activity.date).toLocaleDateString()}</div>
+                                <div class="activity-title">${activity.title}</div>
+                                <div class="activity-desc">${activity.description}</div>
+                            </div>
+                        `).join('');
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading profile data:', error);
+            }
+        }
+        
+        function editBio() {
+            const currentBio = document.getElementById('profileBio').textContent;
+            const newBio = prompt('Edit your bio:', currentBio);
+            if (newBio !== null) {
+                document.getElementById('profileBio').textContent = newBio;
+                // Here you would typically save to backend
+            }
+        }
+        
+        function savePreferences() {
+            const language = document.getElementById('languagePreference').value;
+            // Save preferences to backend
+            alert('Preferences saved!');
+        }
+    </script>
+</body>
+</html>
