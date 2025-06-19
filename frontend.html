@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Heritage Travel Planner</title>
+  <style>
+    body { font-family: Arial; padding: 2em; background: #f9f9f9; }
+    h1 { color: #3a3a3a; }
+    input, button { padding: 0.6em; margin: 0.5em 0; width: 100%; max-width: 300px; }
+    textarea { width: 100%; height: 300px; margin-top: 1em; }
+  </style>
+</head>
+<body>
+  <h1>Heritage Tourism Planner</h1>
+  <label>City in Tamil Nadu:</label><br />
+  <input type="text" id="city" placeholder="e.g., Madurai" /><br />
+  <label>Number of Days:</label><br />
+  <input type="number" id="days" /><br />
+  <button onclick="getPlan()">Generate Plan</button>
+
+  <h2>Generated Plan:</h2>
+  <textarea id="output" readonly></textarea>
+
+  <script>
+    async function getPlan() {
+      const city = document.getElementById("city").value;
+      const days = document.getElementById("days").value;
+
+      const res = await fetch("http://localhost:8000/generate-plan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ city, days })
+      });
+
+      const data = await res.json();
+      document.getElementById("output").value = data.plan || data.error;
+    }
+  </script>
+</body>
+</html>

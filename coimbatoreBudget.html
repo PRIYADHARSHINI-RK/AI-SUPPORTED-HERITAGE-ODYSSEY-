@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏰 Coimbatore Trails | Cultural Travel Planner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+     <style>
+        /* Your original CSS remains completely unchanged */
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #FFA502;
+            --accent: #1E90FF;
+            --dark: #2F3542;
+            --light: #F1F2F6;
+            --success: #2ED573;
+            --premium: #9C88FF;
+            --elite: #E84393;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --gold: #FFD700;
+            --dark-bg: #1a1a1a;
+            --card-bg: #222;
+            --input-bg: #333;
+            --border-color: #444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 900px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid var(--gold);
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: rotate 15s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            color: var(--gold);
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 5px;
+            margin: 20px auto 0;
+            width: fit-content;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            color: white;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+        }
+        
+        .tab-btn:hover:not(.active) {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Main Content */
+        .content {
+            padding: 30px;
+        }
+        
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--gold);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--input-bg);
+            color: white;
+        }
+        
+        input:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+            outline: none;
+        }
+        
+        #distance {
+            background-color: #2a2a2a;
+            font-weight: 600;
+        }
+        
+        /* Tier Selection */
+        .tier-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .tier-option {
+            position: relative;
+        }
+        
+        .tier-option input {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .tier-option label {
+            padding: 20px;
+            background: var(--input-bg);
+            border-radius: 15px;
+            border: 2px solid var(--border-color);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .tier-option input:checked + label {
+            border-color: var(--primary);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+            transform: translateY(-5px);
+            background: #2a2a2a;
+        }
+        
+        .tier-option label:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .tier-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .tier-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .tier-price {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .economy .tier-icon { color: var(--success); }
+        .premium .tier-icon { color: var(--premium); }
+        .elite .tier-icon { color: var(--elite); }
+        
+        .economy input:checked + label { border-color: var(--success); }
+        .premium input:checked + label { border-color: var(--premium); }
+        .elite input:checked + label { border-color: var(--elite); }
+        
+        /* Checkbox Group */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            background: var(--input-bg);
+            padding: 12px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .checkbox-item:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        
+        .checkbox-item input {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .checkbox-item label {
+            margin: 0;
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(to right, #ff5e5e, #ff9900);
+        }
+        
+        .btn-secondary {
+            background: var(--dark);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #1E272E;
+        }
+
+        .back-btn {
+            background-color: #555;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .back-btn:hover {
+            background-color: #666;
+        }
+        
+        /* Results Section */
+        .result-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Combined cost card styles */
+        .cost-card {
+            background: #2a2a2a;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--success);
+        }
+        
+        .cost-card h3 {
+            color: var(--success);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .cost-item:last-child {
+            border-bottom: none;
+        }
+        
+        .total-cost {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+            background: #3a2a2a;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        /* Recommendation Cards */
+        .recommendation-card {
+            background: #2a2a2a;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .recommendation-card h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .place-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .place-item:last-child {
+            border-bottom: none;
+        }
+        
+        .place-icon {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--accent);
+        }
+        
+        .place-info {
+            flex: 1;
+        }
+        
+        .place-name {
+            font-weight: 600;
+            color: white;
+        }
+        
+        .place-details {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 3px;
+        }
+        
+        /* Travel Tips */
+        .travel-tips {
+            background: #332a00;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .travel-tips h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .tip-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .tip-icon {
+            color: var(--gold);
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .action-buttons .btn {
+            flex: 1;
+        }
+        
+        /* Saved Plans */
+        .saved-plans {
+            display: none;
+        }
+        
+        .plan-card {
+            background: #2a2a2a;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: var(--primary);
+        }
+        
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .plan-title {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .plan-date {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .plan-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .plan-detail {
+            background: #333;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .plan-detail-label {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        
+        .plan-detail-value {
+            font-weight: 600;
+            margin-top: 5px;
+            color: white;
+        }
+        
+        /* No plans message */
+        .no-plans {
+            text-align: center;
+            padding: 30px;
+            color: #aaa;
+        }
+        
+        .no-plans i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tier-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .plan-details {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        /* Animation for buttons */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #2a2a2a;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff5e5e;
+        }
+        
+        /* Floating animation for logo */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .logo {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Glow effect for premium/elite tiers */
+        .premium input:checked + label,
+        .elite input:checked + label {
+            box-shadow: 0 0 15px rgba(156, 136, 255, 0.5);
+        }
+        
+        .elite input:checked + label {
+            box-shadow: 0 0 15px rgba(232, 67, 147, 0.5);
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-mountain"></i>
+            </div>
+            <h1>Coimbatore Trails</h1>
+            <p>Explore the textile hub and gateway to the Western Ghats</p>
+            
+            <div class="tabs">
+                <button class="tab-btn active" id="plannerTab">Planner</button>
+                <button class="tab-btn" id="savedTab">My Plans</button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Planner Section -->
+            <div id="plannerSection">
+                <form id="budgetForm">
+                    <div class="form-group">
+                        <label for="fromDistrict"><i class="fas fa-map-marker-alt"></i> Coming From</label>
+                        <select id="fromDistrict" required>
+                            <option value="">Select your district</option>
+                            <option value="Ariyalur">Ariyalur</option>
+                            <option value="Chengalpattu">Chengalpattu</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Coimbatore">Coimbatore</option>
+                            <option value="Cuddalore">Cuddalore</option>
+                            <option value="Dharmapuri">Dharmapuri</option>
+                            <option value="Dindigul">Dindigul</option>
+                            <option value="Erode">Erode</option>
+                            <option value="Kallakurichi">Kallakurichi</option>
+                            <option value="Kanchipuram">Kanchipuram</option>
+                            <option value="Kanyakumari">Kanyakumari</option>
+                            <option value="Karur">Karur</option>
+                            <option value="Krishnagiri">Krishnagiri</option>
+                            <option value="Madurai">Madurai</option>
+                            <option value="Mayiladuthurai">Mayiladuthurai</option>
+                            <option value="Nagapattinam">Nagapattinam</option>
+                            <option value="Namakkal">Namakkal</option>
+                            <option value="Nilgiris">Nilgiris</option>
+                            <option value="Perambalur">Perambalur</option>
+                            <option value="Pudukkottai">Pudukkottai</option>
+                            <option value="Ramanathapuram">Ramanathapuram</option>
+                            <option value="Ranipet">Ranipet</option>
+                            <option value="Salem">Salem</option>
+                            <option value="Sivaganga">Sivaganga</option>
+                            <option value="Tenkasi">Tenkasi</option>
+                            <option value="Thanjavur">Thanjavur</option>
+                            <option value="Theni">Theni</option>
+                            <option value="Thoothukudi">Thoothukudi</option>
+                            <option value="Tiruchirappalli">Tiruchirappalli</option>
+                            <option value="Tirunelveli">Tirunelveli</option>
+                            <option value="Tirupattur">Tirupattur</option>
+                            <option value="Tiruppur">Tiruppur</option>
+                            <option value="Tiruvallur">Tiruvallur</option>
+                            <option value="Tiruvannamalai">Tiruvannamalai</option>
+                            <option value="Tiruvarur">Tiruvarur</option>
+                            <option value="Vellore">Vellore</option>
+                            <option value="Viluppuram">Viluppuram</option>
+                            <option value="Virudhunagar">Virudhunagar</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="distance"><i class="fas fa-road"></i> Distance to Coimbatore (km)</label>
+                        <input type="number" id="distance" min="1" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="persons"><i class="fas fa-users"></i> Number of Persons</label>
+                        <input type="number" id="persons" min="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="days"><i class="fas fa-calendar-day"></i> Number of Days</label>
+                        <input type="number" id="days" min="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-crown"></i> Select Your Travel Style</label>
+                        <div class="tier-options">
+                            <div class="tier-option economy">
+                                <input type="radio" name="tier" value="economy" id="economy" checked>
+                                <label for="economy">
+                                    <div class="tier-icon"><i class="fas fa-walking"></i></div>
+                                    <div class="tier-name">Budget Explorer</div>
+                                    <div class="tier-price">Economical Travel</div>
+                                </label>
+                            </div>
+                            
+                            <div class="tier-option premium">
+                                <input type="radio" name="tier" value="premium" id="premium">
+                                <label for="premium">
+                                    <div class="tier-icon"><i class="fas fa-suitcase"></i></div>
+                                    <div class="tier-name">Comfort Traveler</div>
+                                    <div class="tier-price">Mid-range</div>
+                                </label>
+                            </div>
+                            
+                            <div class="tier-option elite">
+                                <input type="radio" name="tier" value="elite" id="elite">
+                                <label for="elite">
+                                    <div class="tier-icon"><i class="fas fa-gem"></i></div>
+                                    <div class="tier-name">Luxury Explorer</div>
+                                    <div class="tier-price">Premium Experience</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interCityTransport"><i class="fas fa-bus"></i> Travel Mode to Coimbatore</label>
+                        <select id="interCityTransport">
+                            <option value="bus">Bus (₹3/km per person)</option>
+                            <option value="train">Train (₹2/km per person)</option>
+                            <option value="car">Car (₹10/km fuel total)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-check-circle"></i> What to Include?</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" value="Stay" id="stay" checked>
+                                <label for="stay"><i class="fas fa-hotel"></i> Stay</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" value="Food" id="food" checked>
+                                <label for="food"><i class="fas fa-utensils"></i> Food</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" value="Transport" id="transport" checked>
+                                <label for="transport"><i class="fas fa-taxi"></i> Transport</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" value="Shopping" id="shopping" checked>
+                                <label for="shopping"><i class="fas fa-shopping-bag"></i> Shopping</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" value="Tickets" id="tickets" checked>
+                                <label for="tickets"><i class="fas fa-ticket-alt"></i> Tickets</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" id="transportOptions" style="display: none;">
+                        <label for="transportType"><i class="fas fa-car-side"></i> Choose Local Transport</label>
+                        <select id="transportType">
+                            <option value="bus">Bus (₹500/day per person)</option>
+                            <option value="bike">Bike (₹800/day total)</option>
+                            <option value="car">Car (₹2000/day total)</option>
+                            <option value="van">Van (₹3000/day total)</option>
+                            <option value="auto">Auto (₹1500/day total)</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-pulse">
+                        <i class="fas fa-magic"></i> Create My Coimbatore Trip Plan
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Results Section -->
+            <div class="result-section" id="resultSection">
+                <button class="btn back-btn" id="backBtn">
+                    <i class="fas fa-arrow-left"></i> Back to Form
+                </button>
+                <h2 class="section-title">
+                    <i class="fas fa-mountain"></i> Your Coimbatore Experience
+                </h2>
+                
+                <div id="resultContent"></div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="savePlanBtn">
+                        <i class="fas fa-bookmark"></i> Save This Plan
+                    </button>
+                    <button class="btn btn-secondary" id="newPlanBtn">
+                        <i class="fas fa-plus"></i> Create New Plan
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Saved Plans Section -->
+            <div class="saved-plans" id="savedPlans">
+                <h2 class="section-title">
+                    <i class="fas fa-bookmark"></i> My Saved Coimbatore Trips
+                </h2>
+                
+                <div id="savedPlansList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // District to Coimbatore distance mapping
+        const districtDistances = {
+            'Ariyalur': 230,
+            'Chengalpattu': 400,
+            'Chennai': 500,
+            'Coimbatore': 0,
+            'Cuddalore': 300,
+            'Dharmapuri': 200,
+            'Dindigul': 150,
+            'Erode': 100,
+            'Kallakurichi': 280,
+            'Kanchipuram': 450,
+            'Kanyakumari': 300,
+            'Karur': 150,
+            'Krishnagiri': 250,
+            'Madurai': 200,
+            'Mayiladuthurai': 280,
+            'Nagapattinam': 300,
+            'Namakkal': 120,
+            'Nilgiris': 80,
+            'Perambalur': 200,
+            'Pudukkottai': 220,
+            'Ramanathapuram': 250,
+            'Ranipet': 350,
+            'Salem': 160,
+            'Sivaganga': 220,
+            'Tenkasi': 180,
+            'Thanjavur': 250,
+            'Theni': 150,
+            'Thoothukudi': 280,
+            'Tiruchirappalli': 200,
+            'Tirunelveli': 250,
+            'Tirupattur': 220,
+            'Tiruppur': 50,
+            'Tiruvallur': 480,
+            'Tiruvannamalai': 300,
+            'Tiruvarur': 280,
+            'Vellore': 350,
+            'Viluppuram': 320,
+            'Virudhunagar': 180
+        };
+
+        // Tier-based pricing multipliers
+        const tierMultipliers = {
+            economy: { 
+                stay: 1, food: 1, transport: 1, shopping: 1, tickets: 1,
+                hotelBase: 1200, foodBase: 500, transportBase: 1, shoppingBase: 1000, ticketsBase: 400
+            },
+            premium: { 
+                stay: 1.5, food: 1.5, transport: 1.3, shopping: 1.5, tickets: 1.2,
+                hotelBase: 2500, foodBase: 1000, transportBase: 1.3, shoppingBase: 2000, ticketsBase: 800
+            },
+            elite: { 
+                stay: 2.5, food: 2, transport: 1.8, shopping: 2, tickets: 1.5,
+                hotelBase: 5000, foodBase: 2000, transportBase: 1.8, shoppingBase: 4000, ticketsBase: 1500
+            }
+        };
+
+        // Tier-based recommendations
+        const tierRecommendations = {
+            economy: {
+                hotels: [
+                    { name: 'Budget Lodge', rating: '3.7/5', price: '₹1000-1800', icon: 'hotel', details: 'Basic accommodation near Gandhipuram' },
+                    { name: 'Railway Retiring Rooms', rating: '3.5/5', price: '₹900-1500', icon: 'train', details: 'Convenient for train travelers' }
+                ],
+                food: [
+                    { name: 'Local Mess & Dhabas', rating: '4.1/5', price: '₹60-120', icon: 'utensils', details: 'Authentic Kongu meals' },
+                    { name: 'Street Food Stalls', rating: '4.0/5', price: '₹30-100', icon: 'hamburger', details: 'Try Coimbatore special snacks' }
+                ],
+                tips: [
+                    'Visit textile markets early morning for best deals',
+                    'Use public buses for economical travel',
+                    'Bargain at local markets for best prices'
+                ]
+            },
+            premium: {
+                hotels: [
+                    { name: 'City Comfort Hotel', rating: '4.1/5', price: '₹2500-4000', icon: 'building', details: 'Comfortable stay with city views' },
+                    { name: 'Residency Hotel', rating: '4.2/5', price: '₹3000-4500', icon: 'water', details: 'Good location near commercial areas' }
+                ],
+                food: [
+                    { name: 'Heritage Restaurant', rating: '4.2/5', price: '₹200-500', icon: 'pepper-hot', details: 'Traditional Kongu cuisine' },
+                    { name: 'Rooftop Cafe', rating: '4.1/5', price: '₹250-600', icon: 'mug-hot', details: 'Great views with meals' }
+                ],
+                tips: [
+                    'Book hotels near Gandhipuram for convenience',
+                    'Try Kongu specialty restaurants',
+                    'Hire a guide for industrial visits'
+                ]
+            },
+            elite: {
+                hotels: [
+                    { name: 'Luxury Business Hotel', rating: '4.6/5', price: '₹5000-10000', icon: 'gem', details: 'Premium accommodation with all amenities' },
+                    { name: 'Five Star Resort', rating: '4.7/5', price: '₹6000-12000', icon: 'star', details: 'Luxury stay with spa facilities' }
+                ],
+                food: [
+                    { name: 'Fine Dining Restaurant', rating: '4.5/5', price: '₹500-1500', icon: 'wine-glass-alt', details: 'Multi-cuisine gourmet experience' },
+                    { name: 'Specialty Kitchen', rating: '4.4/5', price: '₹600-1800', icon: 'cheese', details: 'International cuisine' }
+                ],
+                tips: [
+                    'Book private car with driver for comfort',
+                    'Reserve premium spa treatments',
+                    'Visit exclusive textile showrooms'
+                ]
+            }
+        };
+
+        // Coimbatore places data
+        const coimbatorePlaces = {
+            industrial: [
+                { name: 'Textile Markets', details: 'Famous for cotton fabrics and sarees', icon: 'tshirt' },
+                { name: 'Pump & Motor Industries', details: 'Industrial hub for engineering goods', icon: 'industry' },
+                { name: 'IT Parks', details: 'Growing IT sector with tech companies', icon: 'laptop-code' }
+            ],
+            shopping: [
+                { name: 'Gandhipuram Market', details: 'Main shopping area with textiles', icon: 'shopping-basket' },
+                { name: 'Brookefields Mall', details: 'Modern shopping mall with brands', icon: 'store' },
+                { name: 'Crosscut Road Market', details: 'Local spices and handicrafts', icon: 'pepper-hot' }
+            ],
+            cultural: [
+                { name: 'Perur Patteeswarar Temple', details: 'Ancient temple with musical pillars', icon: 'om' },
+                { name: 'Dhyanalinga Temple', details: 'Meditation center with unique architecture', icon: 'yin-yang' },
+                { name: 'Gass Forest Museum', details: 'Exhibits of forest products', icon: 'tree' }
+            ],
+            nature: [
+                { name: 'Marudhamalai Temple', details: 'Hill temple with panoramic views', icon: 'mountain' },
+                { name: 'Siruvani Waterfalls', details: 'Beautiful waterfalls with clean water', icon: 'water' },
+                { name: 'Anamalai Wildlife Sanctuary', details: 'Nature trails and wildlife', icon: 'paw' }
+            ]
+        };
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab navigation
+            document.getElementById('plannerTab').addEventListener('click', function() {
+                showSection('planner');
+            });
+            
+            document.getElementById('savedTab').addEventListener('click', function() {
+                showSection('saved');
+                loadSavedPlans();
+            });
+            
+            // Auto-calculate distance
+            document.getElementById('fromDistrict').addEventListener('change', function() {
+                const selectedDistrict = this.value;
+                if (selectedDistrict && districtDistances[selectedDistrict]) {
+                    document.getElementById('distance').value = districtDistances[selectedDistrict];
+                } else {
+                    document.getElementById('distance').value = '';
+                }
+            });
+            
+            // Show/hide transport options
+            document.getElementById('transport').addEventListener('change', function() {
+                document.getElementById('transportOptions').style.display = this.checked ? 'block' : 'none';
+            });
+            
+            // Form submission
+            document.getElementById('budgetForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                generatePlan();
+            });
+            
+            // Save plan button
+            document.getElementById('savePlanBtn').addEventListener('click', savePlan);
+            
+            // New plan button
+            document.getElementById('newPlanBtn').addEventListener('click', function() {
+                showSection('planner');
+            });
+
+            // Back button functionality
+            document.getElementById('backBtn').addEventListener('click', function() {
+                showSection('planner');
+            });
+            
+            // Initialize transport options visibility
+            document.getElementById('transportOptions').style.display = 
+                document.getElementById('transport').checked ? 'block' : 'none';
+        });
+        
+        // Show specific section
+        function showSection(section) {
+            document.getElementById('plannerSection').style.display = section === 'planner' ? 'block' : 'none';
+            document.getElementById('resultSection').style.display = section === 'result' ? 'block' : 'none';
+            document.getElementById('savedPlans').style.display = section === 'saved' ? 'block' : 'none';
+            
+            // Update active tab
+            document.getElementById('plannerTab').classList.toggle('active', section === 'planner');
+            document.getElementById('savedTab').classList.toggle('active', section === 'saved');
+        }
+        
+        // Generate travel plan
+        function generatePlan() {
+            const fromDistrict = document.getElementById('fromDistrict').value;
+            const distance = parseInt(document.getElementById('distance').value);
+            const persons = parseInt(document.getElementById('persons').value);
+            const days = parseInt(document.getElementById('days').value);
+            const interCityTransport = document.getElementById('interCityTransport').value;
+            const selectedTier = document.querySelector('input[name="tier"]:checked').value;
+
+            // Validate required fields
+            if (!fromDistrict || isNaN(distance) || isNaN(persons) || isNaN(days)) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Get tier multipliers
+            const multipliers = tierMultipliers[selectedTier];
+            // Calculate travel cost
+            let travelCost = 0;
+            switch(interCityTransport) {
+                case 'bus': travelCost = distance * 3 * persons; break;
+                case 'train': travelCost = distance * 2 * persons; break;
+                case 'car': travelCost = distance * 10; break;
+            }
+
+            // Get selected categories
+            let categories = [];
+            ['stay', 'food', 'transport', 'shopping', 'tickets'].forEach(cat => {
+                if(document.getElementById(cat).checked) categories.push(cat);
+            });
+
+            // Calculate costs with tier multipliers
+            let stayCost = categories.includes('stay') ? multipliers.hotelBase * days * persons : 0;
+            let foodCost = categories.includes('food') ? multipliers.foodBase * days * persons : 0;
+            let shoppingCost = categories.includes('shopping') ? multipliers.shoppingBase : 0;
+            let ticketCost = categories.includes('tickets') ? multipliers.ticketsBase : 0;
+
+            let transportCost = 0;
+            if (categories.includes('transport')) {
+                const transportType = document.getElementById('transportType').value;
+                let baseCost;
+                switch(transportType) {
+                    case 'bus': baseCost = 500 * days * persons; break;
+                    case 'bike': baseCost = 800 * days; break;
+                    case 'car': baseCost = 2000 * days; break;
+                    case 'van': baseCost = 3000 * days; break;
+                    case 'auto': baseCost = 1500 * days; break;
+                }
+                transportCost = baseCost * multipliers.transport;
+            }
+
+            // Total cost
+            let totalCost = travelCost + stayCost + foodCost + transportCost + shoppingCost + ticketCost;
+
+            // Get tier-based recommendations
+            const recommendations = tierRecommendations[selectedTier];
+
+            // Build results HTML
+            let resultsHTML = `
+                <div class="cost-card">
+                    <h3><i class="fas fa-file-invoice-dollar"></i> Cost Breakdown</h3>
+                    <p>${selectedTier.charAt(0).toUpperCase() + selectedTier.slice(1)} plan for ${persons} ${persons === 1 ? 'person' : 'people'} for ${days} ${days === 1 ? 'day' : 'days'}</p>
+                    
+                    <div class="cost-item">
+                        <span><i class="fas fa-route"></i> Travel from ${fromDistrict} (${distance}km)</span>
+                        <span>₹${travelCost.toFixed(0)}</span>
+                    </div>
+                    
+                    ${categories.includes('stay') ? `
+                    <div class="cost-item">
+                        <span><i class="fas fa-hotel"></i> Accommodation</span>
+                        <span>₹${stayCost.toFixed(0)}</span>
+                    </div>` : ''}
+                    
+                    ${categories.includes('food') ? `
+                    <div class="cost-item">
+                        <span><i class="fas fa-utensils"></i> Food & Dining</span>
+                        <span>₹${foodCost.toFixed(0)}</span>
+                    </div>` : ''}
+                    
+                    ${categories.includes('transport') ? `
+                    <div class="cost-item">
+                        <span><i class="fas fa-taxi"></i> Local Transport</span>
+                        <span>₹${transportCost.toFixed(0)}</span>
+                    </div>` : ''}
+                    
+                    ${categories.includes('shopping') ? `
+                    <div class="cost-item">
+                        <span><i class="fas fa-shopping-bag"></i> Shopping</span>
+                        <span>₹${shoppingCost.toFixed(0)}</span>
+                    </div>` : ''}
+                    
+                    ${categories.includes('tickets') ? `
+                    <div class="cost-item">
+                        <span><i class="fas fa-ticket-alt"></i> Entry Tickets</span>
+                        <span>₹${ticketCost.toFixed(0)}</span>
+                    </div>` : ''}
+                    
+                    <div class="cost-item total-cost">
+                        <span><i class="fas fa-calculator"></i> Total Estimated Cost</span>
+                        <span>₹${totalCost.toFixed(0)}</span>
+                    </div>
+                </div>
+            `;
+
+            // Add tier-specific recommendations
+            if (categories.includes('stay')) {
+                resultsHTML += `
+                    <div class="recommendation-card">
+                        <h3><i class="fas fa-hotel"></i> ${selectedTier.charAt(0).toUpperCase() + selectedTier.slice(1)} Stay Recommendations</h3>
+                        ${recommendations.hotels.map(hotel => `
+                            <div class="place-item">
+                                <div class="place-icon">
+                                    <i class="fas fa-${hotel.icon}"></i>
+                                </div>
+                                <div class="place-info">
+                                    <div class="place-name">${hotel.name}</div>
+                                    <div class="place-details">${hotel.rating} • ${hotel.price}</div>
+                                    <div class="place-details" style="font-style: italic;">${hotel.details}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>`;
+            }
+
+            if (categories.includes('food')) {
+                resultsHTML += `
+                    <div class="recommendation-card">
+                        <h3><i class="fas fa-utensils"></i> ${selectedTier.charAt(0).toUpperCase() + selectedTier.slice(1)} Dining Options</h3>
+                        ${recommendations.food.map(restaurant => `
+                            <div class="place-item">
+                                <div class="place-icon">
+                                    <i class="fas fa-${restaurant.icon}"></i>
+                                </div>
+                                <div class="place-info">
+                                    <div class="place-name">${restaurant.name}</div>
+                                    <div class="place-details">${restaurant.rating} • ${restaurant.price}</div>
+                                    <div class="place-details" style="font-style: italic;">${restaurant.details}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>`;
+            }
+
+            // Add travel tips
+            resultsHTML += `
+                <div class="travel-tips">
+                    <h3><i class="fas fa-lightbulb"></i> ${selectedTier.charAt(0).toUpperCase() + selectedTier.slice(1)} Travel Tips</h3>
+                    ${recommendations.tips.map(tip => `
+                        <div class="tip-item">
+                            <div class="tip-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>${tip}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            // Add Coimbatore attractions
+            if (categories.includes('tickets')) {
+                resultsHTML += `
+                    <div class="recommendation-card">
+                        <h3><i class="fas fa-industry"></i> Industrial & Business Attractions</h3>
+                        ${coimbatorePlaces.industrial.map(place => `
+                            <div class="place-item">
+                                <div class="place-icon">
+                                    <i class="fas fa-${place.icon}"></i>
+                                </div>
+                                <div class="place-info">
+                                    <div class="place-name">${place.name}</div>
+                                    <div class="place-details">${place.details}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>`;
+            }
+            
+            if (categories.includes('shopping')) {
+                resultsHTML += `
+                    <div class="recommendation-card">
+                        <h3><i class="fas fa-shopping-cart"></i> Local Shopping Experiences</h3>
+                        ${coimbatorePlaces.shopping.map(place => `
+                            <div class="place-item">
+                                <div class="place-icon">
+                                    <i class="fas fa-${place.icon}"></i>
+                                </div>
+                                <div class="place-info">
+                                    <div class="place-name">${place.name}</div>
+                                    <div class="place-details">${place.details}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>`;
+            }
+            
+            // Add cultural and nature experiences
+            resultsHTML += `
+                <div class="recommendation-card">
+                    <h3><i class="fas fa-monument"></i> Cultural & Religious Sites</h3>
+                    ${coimbatorePlaces.cultural.map(place => `
+                        <div class="place-item">
+                            <div class="place-icon">
+                                <i class="fas fa-${place.icon}"></i>
+                            </div>
+                            <div class="place-info">
+                                <div class="place-name">${place.name}</div>
+                                <div class="place-details">${place.details}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="recommendation-card">
+                    <h3><i class="fas fa-tree"></i> Nature & Outdoor Activities</h3>
+                    ${coimbatorePlaces.nature.map(place => `
+                        <div class="place-item">
+                            <div class="place-icon">
+                                <i class="fas fa-${place.icon}"></i>
+                            </div>
+                            <div class="place-info">
+                                <div class="place-name">${place.name}</div>
+                                <div class="place-details">${place.details}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div style="text-align: center; margin: 30px 0 20px; font-size: 1.1rem; color: var(--primary);">
+                    <i class="fas fa-mountain"></i> Enjoy your Coimbatore experience! <i class="fas fa-industry"></i>
+                </div>
+            `;
+
+            // Show results
+            document.getElementById('resultContent').innerHTML = resultsHTML;
+            showSection('result');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Save current plan
+        function savePlan() {
+            const fromDistrict = document.getElementById('fromDistrict').value;
+            const persons = document.getElementById('persons').value;
+            const days = document.getElementById('days').value;
+            const tier = document.querySelector('input[name="tier"]:checked').value;
+            
+            const planData = {
+                date: new Date().toLocaleDateString('en-IN'),
+                fromDistrict,
+                persons,
+                days,
+                tier
+            };
+            
+            let savedPlans = JSON.parse(localStorage.getItem('coimbatorePlans')) || [];
+            savedPlans.push(planData);
+            localStorage.setItem('coimbatorePlans', JSON.stringify(savedPlans));
+            
+            alert('Your Coimbatore trip plan has been saved successfully!');
+        }
+        
+        // Load saved plans
+        function loadSavedPlans() {
+            const savedPlans = JSON.parse(localStorage.getItem('coimbatorePlans')) || [];
+            const plansList = document.getElementById('savedPlansList');
+            
+            if (savedPlans.length === 0) {
+                plansList.innerHTML = `
+                    <div class="no-plans">
+                        <i class="fas fa-bookmark"></i>
+                        <p>No saved plans yet.</p>
+                        <p>Create your first Coimbatore trip plan and save it here!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            plansList.innerHTML = savedPlans.map((plan, index) => `
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <div class="plan-title">${plan.fromDistrict} to Coimbatore</div>
+                        <div class="plan-date">${plan.date}</div>
+                    </div>
+                    <div class="plan-details">
+                        <div class="plan-detail">
+                            <div class="plan-detail-label">Tier</div>
+                            <div class="plan-detail-value" style="color: ${
+                                plan.tier === 'economy' ? 'var(--success)' : 
+                                plan.tier === 'premium' ? 'var(--premium)' : 'var(--elite)'
+                            };">${plan.tier.charAt(0).toUpperCase() + plan.tier.slice(1)}</div>
+                        </div>
+                        <div class="plan-detail">
+                            <div class="plan-detail-label">Persons</div>
+                            <div class="plan-detail-value">${plan.persons}</div>
+                        </div>
+                        <div class="plan-detail">
+                            <div class="plan-detail-label">Days</div>
+                            <div class="plan-detail-value">${plan.days}</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" style="margin-top: 15px; width: 100%;" 
+                            onclick="loadSavedPlan(${index})">
+                        <i class="fas fa-eye"></i> View Details
+                    </button>
+                </div>
+            `).join('');
+        }
+        
+        // Load a specific saved plan
+        window.loadSavedPlan = function(index) {
+            const savedPlans = JSON.parse(localStorage.getItem('coimbatorePlans')) || [];
+            const plan = savedPlans[index];
+            
+            if (plan) {
+                document.getElementById('fromDistrict').value = plan.fromDistrict;
+                document.getElementById('distance').value = districtDistances[plan.fromDistrict] || '';
+                document.getElementById('persons').value = plan.persons;
+                document.getElementById('days').value = plan.days;
+                document.querySelector(`input[name="tier"][value="${plan.tier}"]`).checked = true;
+                
+                showSection('planner');
+                alert('Plan loaded! Click "Create My Coimbatore Trip Plan" to see details.');
+            }
+        }
+    </script>
+</body>
+</html

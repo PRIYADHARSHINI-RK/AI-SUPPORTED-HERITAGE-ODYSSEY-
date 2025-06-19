@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heritage Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <nav class="heritage-navbar">
+            <div class="heritage-logo">
+                <a href="#">Heritage Odyssey</a>
+            </div>
+            
+            <ul class="heritage-nav-links">
+                <li><a href="#heritage-hero">Home</a></li>
+                <li><a href="#heritage-content-section">Categories</a></li>
+                <li><a href="#dist-section">Destinations</a></li>
+                <li><a href="#heritage-features">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <!-- Search Box -->
+            <div class="heritage-search-container">
+                <input type="text" placeholder="🔍Search..." class="heritage-search-bar">
+                <button class="heritage-voice-btn" onclick="startVoiceSearch()">🎙️</button>
+            </div>     
+            
+            <!-- In your header section, replace the login button with this -->
+           <div class="user-profile-container" id="userProfileContainer" onclick="toggleDropdown()" style="display: none;">
+                <div class="user-avatar" id="userAvatar"></div>
+                <span class="user-name" id="userName"></span>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="#" onclick="viewProfile()">My Profile</a>
+                    <a href="#" onclick="viewBookmarks()">Saved Places</a>
+                    <a href="#" onclick="logout()">Log Out</a>
+                </div>
+            </div>
+            <button class="login-btn" id="loginButton" onclick="openModal()">Log In / Sign Up</button>
+            
+            <!--button class="login-btn" onclick="openModal()">Log In / Sign Up</button-->
+            <div class="heritage-hamburger" onclick="toggleMenu()">☰</div>
+        </nav>
+    </header>
+
+   
+
+    <!-- Hero Section -->
+    <!-- Hero Section -->
+        <!-- Hero Section -->
+<section id="heritage-hero" class="heritage-hero">
+    <div class="heritage-overlay"></div>
+    <div class="heritage-hero-content">
+        <h1>Discover the Timeless Beauty of Heritage Sites</h1>
+        <p>Step into the past and explore architectural wonders, cultural traditions, and historic landscapes.</p>
+        <!--a href="#" class="heritage-explore-btn">Start Your Journey</a-->
+        <a href="#" class="heritage-explore-btn" onclick="checkLogin()">Start Your Journey</a>
+       
+       <div style="margin: 100px auto; text-align: center;">
+            <a href="LLM.html"
+               style="padding: 15px 30px; background-color: #ff5e00; color: white; text-decoration: none; font-size: 20px; border-radius: 8px; font-family: Arial, sans-serif; box-shadow: 0 4px 10px rgba(0,0,0,0.5); transition: background 0.3s ease;"
+               onmouseover="this.style.backgroundColor='#e04d00'"
+               onmouseout="this.style.backgroundColor='#ff5e00'">
+               YatraBot
+            </a>
+          </div> 
+        
+    </div>
+
+    
+
+   <!-- Login & Signup Modal -->
+  <div id="auth-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+
+      <div id="login-form">
+        <h2>Login</h2>
+        <input type="email" id="login-email" placeholder="Email" required>
+        <input type="password" id="login-password" placeholder="Password" required>
+        <button onclick="loginUser()">Login</button>
+        <p>Don't have an account? <a href="#" onclick="switchToSignup()">Sign up</a></p>
+      </div>
+
+      <div id="signup-form" style="display: none;">
+        <h2>Sign Up</h2>
+        <input type="text" id="signup-name" placeholder="Full Name" required>
+        <input type="email" id="signup-email" placeholder="Email" required>
+        <input type="password" id="signup-password" placeholder="Password" required>
+        <button onclick="signupUser()">Sign Up</button>
+        <p>Already have an account? <a href="#" onclick="switchToLogin()">Login</a></p>
+      </div>
+    </div>
+  </div>
+    </div>
+
+
+</section>
+<!-- App Features Section -->
+
+
+
+
+
+    <section id="heritage-content-section" class="heritage-content-section">
+        <div class="heritage-container">
+            <a href="explore.html">
+                <img src="images/temples.jpg" alt="Temples">
+                <div class="heritage-caption">
+                    <h3>Temples</h3>
+                    <p>Experience the spiritual essence and architectural brilliance of ancient temples.</p>
+                </div>
+            </a>
+        </div>
+    
+        <div class="heritage-container">
+            <a href="explore.html">
+                <img src="images/palaces.jpg" alt="Palaces">
+                <div class="heritage-caption">
+                    <h3>Palaces</h3>
+                    <p>Step into the grandeur of royal palaces and relive the stories of kings and queens.</p>
+                </div>
+            </a>
+        </div>
+    
+        <div class="heritage-container">
+            <a href="explore.html">
+                <img src="images/museums.jpg" alt="Museums">
+                <div class="heritage-caption">
+                    <h3>Museums</h3>
+                    <p>Explore priceless artifacts and historical treasures preserved in iconic museums.</p>
+                </div>
+            </a>
+        </div>
+    
+        <div class="heritage-container">
+            <a href="explore.html">
+                <img src="images/memorials.jpg" alt="Memorials">
+                <div class="heritage-caption">
+                    <h3>Memorials</h3>
+                    <p>Pay tribute to historical events and figures at these significant memorial sites.</p>
+                </div>
+            </a>
+        </div>
+    
+        <div class="heritage-container">
+            <a href="explore.html">
+                <img src="images/national-parks.jpg" alt="National Parks">
+                <div class="heritage-caption">
+                    <h3>National Parks</h3>
+                    <p>Witness nature’s beauty and diverse ecosystems in protected national parks.</p>
+                </div>
+            </a>
+        </div>
+    
+        <div class="heritage-container">
+            <a href="explore.html">
+                <img src="images/wildlife-sanctuaries.jpg" alt="Wildlife Sanctuaries">
+                <div class="heritage-caption">
+                    <h3>Wildlife Sanctuaries</h3>
+                    <p>Discover exotic wildlife and rare species in these serene natural reserves.</p>
+                </div>
+            </a>
+        </div>
+    
+        <div class="heritage-container">
+            <a href="explore.html">
+                <img src="images/hill-stations.jpg" alt="Hill Stations">
+                <div class="heritage-caption">
+                    <h3>Hill Stations</h3>
+                    <p>Escape to the tranquil beauty of misty hills and scenic landscapes.</p>
+                </div>
+            </a>
+        </div>
+    
+        <div class="heritage-container">
+            <a href="explore.html">
+                <img src="images/waterfalls.jpg" alt="Waterfalls">
+                <div class="heritage-caption">
+                    <h3>Waterfalls</h3>
+                    <p>Marvel at the breathtaking beauty of cascading waterfalls in pristine locations.</p>
+                </div>
+            </a>
+        </div>
+    
+        <div class="heritage-container">
+            <a href="explore.html">
+                <img src="images/beaches.jpg" alt="Beaches">
+                <div class="heritage-caption">
+                    <h3>Beaches</h3>
+                    <p>Relax by the serene shores and enjoy the sun, sand, and sea breeze.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+
+<!-- Local Business Hero Section START -->
+<div id ="local-business-hero" class="local-business-hero">
+
+    <style>
+      .local-business-hero {
+        position: relative;
+        width: 100%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+  
+      .local-business-hero .hero-section {
+        background: url('images/LocalBusinessBG.jpg') no-repeat center center / cover;
+
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        color: #fff;
+      }
+  
+      .local-business-hero .hero-content {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 50px;
+        border-radius: 20px;
+        text-align: center;
+        max-width: 700px;
+        width: 90%;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1s ease-in-out;
+      }
+  
+      .local-business-hero .hero-content.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+  
+      .local-business-hero .hero-content h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+      }
+  
+      .local-business-hero .hero-content p {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+      }
+  
+      .local-business-hero .hero-button {
+        text-decoration: none;
+        background: linear-gradient(135deg, #00c6ff, #0072ff);
+        padding: 15px 40px;
+        border-radius: 50px;
+        color: white;
+        font-weight: bold;
+        font-size: 1em;
+        box-shadow: 0 4px 20px rgba(0, 114, 255, 0.4);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+  
+      .local-business-hero .hero-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 25px rgba(0, 114, 255, 0.6);
+      }
+  
+      @media (max-width: 600px) {
+        .local-business-hero .hero-content h1 {
+          font-size: 2em;
+        }
+  
+        .local-business-hero .hero-content p {
+          font-size: 1em;
+        }
+      }
+    </style>
+  
+    <section class="hero-section">
+      <div class="hero-content" id="localHeroBox">
+        <h1>Empower Local Dreams</h1>
+        <p>Support small businesses and watch communities grow. Every package tells a story — let's write yours together.</p>
+        <a href="MaduraiLocalBussiness.html" class="hero-button">Explore Packages</a>
+      </div>
+    </section>
+  
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const heroBox = document.getElementById("localHeroBox");
+  
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                heroBox.classList.add("visible");
+                observer.disconnect();
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+  
+        observer.observe(heroBox);
+      });
+    </script>
+  
+  </div>
+  <!-- Local Business Hero Section END -->
+
+
+
+<!-- District Section -->
+<!-- District Section -->
+<section id="dist-section" class="dist-section">
+    <h2 class="dist-heading">Select a District</h2>
+
+    <div class="dist-container">
+
+        <form action="madurai.html" method="GET" class="dist-form">
+            <img src="images/dis-Madurai.jpg" alt="Madurai" class="dist-img">
+            <button type="submit" class="dist-button">Madurai</button>
+        </form>
+        
+        <form action="chennai.html" method="GET" class="dist-form">
+            <img src="images/dist-chennai.jpg" alt="Chennai" class="dist-img">
+            <button type="submit" class="dist-button">Chennai</button>
+        </form>
+        
+         <form action="coimbatore.html" method="GET" class="dist-form">
+            <img src="images/dist-coimbatore.jpg" alt="Coimbatore" class="dist-img">
+            <button type="submit" class="dist-button">Coimbatore</button>
+        </form> 
+     
+        <form action="dindigul.html" method="GET" class="dist-form">
+            <img src="images/dist-dindigul.jpg" alt="Dindigul" class="dist-img">
+            <button type="submit" class="dist-button">Dindigul</button>
+        </form>
+
+        <form action="trichy.html" method="GET" class="dist-form">
+            <img src="images/dist-thiruchi.jpg" alt="Trichirappalli" class="dist-img">
+            <button type="submit" class="dist-button">Trichirappalli</button>
+        </form>
+
+        <form action="theni.html" method="GET" class="dist-form">
+            <img src="images/dist-chengalpattu.jpg" alt="theni" class="dist-img">
+            <button type="submit" class="dist-button">Theni</button>
+        </form>
+
+        
+
+       
+
+        <form action="Cuddalore.html" method="GET" class="dist-form">
+            <img src="images/dist-coimbatore.jpg" alt="Cuddalore" class="dist-img">
+            <button type="submit" class="dist-button">Cuddalore</button>
+        </form>
+
+        <form action="Dharmapuri.html" method="GET" class="dist-form">
+            <img src="images/dist-dharmapuri.jpg" alt="Dharmapuri" class="dist-img">
+            <button type="submit" class="dist-button">Dharmapuri</button>
+        </form>
+
+        
+
+        <form action="Erode.html" method="GET" class="dist-form">
+            <img src="images/dist-erode.jpg" alt="Erode" class="dist-img">
+            <button type="submit" class="dist-button">Erode</button>
+        </form>
+
+        <form action="Kallakurichi.html" method="GET" class="dist-form">
+            <img src="images/dist-kallakurichi.jpg" alt="Kallakurichi" class="dist-img">
+            <button type="submit" class="dist-button">Kallakurichi</button>
+        </form>
+
+        <form action="Kanchipuram.html" method="GET" class="dist-form">
+            <img src="images/dist-kanchipuram.jpg" alt="Kanchipuram" class="dist-img">
+            <button type="submit" class="dist-button">Kanchipuram</button>
+        </form>
+
+        <form action="Karur.html" method="GET" class="dist-form">
+            <img src="images/dist-karur.jpg" alt="Karur" class="dist-img">
+            <button type="submit" class="dist-button">Karur</button>
+        </form>
+
+        <form action="Krishnagiri.html" method="GET" class="dist-form">
+            <img src="images/dist-krishnagiri.jpg" alt="Krishnagiri" class="dist-img">
+            <button type="submit" class="dist-button">Krishnagiri</button>
+        </form>
+
+        <form action="Mayiladuthurai.html" method="GET" class="dist-form">
+            <img src="images/dist-Ariyalur.jpg" alt="Mayiladuthurai" class="dist-img">
+            <button type="submit" class="dist-button">Mayiladuthurai</button>
+        </form>
+
+        <form action="Nagapattinam.html" method="GET" class="dist-form">
+            <img src="images/dist-nagapattinam.jpg" alt="Nagapattinam" class="dist-img">
+            <button type="submit" class="dist-button">Nagapattinam</button>
+        </form>
+
+        
+
+        <form action="Tiruppur.html" method="GET" class="dist-form">
+            <img src="images/dist-theni.jpg" alt="Theni" class="dist-img">
+            <button type="submit" class="dist-button">Tiruppur</button>
+        </form>
+
+        <form action="Vellore.html" method="GET" class="dist-form">
+            <img src="images/dist-vellore.jpg" alt="Vellore" class="dist-img">
+            <button type="submit" class="dist-button">Vellore</button>
+        </form>
+
+        <form action="Viluppuram.html" method="GET" class="dist-form">
+            <img src="images/dist-vilupuram.jpg" alt="Viluppuram" class="dist-img">
+            <button type="submit" class="dist-button">Viluppuram</button>
+        </form>
+
+        <form action="Virudhunagar.html" method="GET" class="dist-form">
+            <img src="images/dist-viruthunagar.jpg" alt="Virudhunagar" class="dist-img">
+            <button type="submit" class="dist-button">Virudhunagar</button>
+        </form>
+
+        <form action="Ariyalur.html" method="GET" class="dist-form">
+            <img src="images/dist-Ariyalur.jpg" alt="Ariyalur" class="dist-img">
+            <button type="submit" class="dist-button">Ariyalur</button>
+        </form>
+
+    </div>
+</section>
+
+ <!-- Repeat for all other districts -->
+
+
+
+    <section id="heritage-features" class="heritage-features">
+        <h2>Why Choose Our App?</h2>
+        <div class="features-container">
+            <div class="feature-box">
+                <h3>🌍 Enhanced Tourist Experience</h3>
+                <p>Navigate heritage sites with ease using interactive guides and immersive storytelling.</p>
+            </div>
+            
+            <div class="feature-box">
+                <h3>📊 Increased Engagement</h3>
+                <p>Engage with rich multimedia content, AR/VR experiences, and interactive maps.</p>
+            </div>
+    
+            <div class="feature-box">
+                <h3>🏛️ Cultural Preservation</h3>
+                <p>Contribute to the preservation of history with digital archives and heritage records.</p>
+            </div>
+    
+            <div class="feature-box">
+                <h3>🗣️ Multilingual Voice Assistance</h3>
+                <p>Enjoy AI-powered voice assistance in multiple languages for better accessibility.</p>
+            </div>
+    
+            <div class="feature-box">
+                <h3>📡 Real-Time Data Integration</h3>
+                <p>Stay updated with live visitor statistics, event updates, and travel alerts.</p>
+            </div>
+    
+            <div class="feature-box">
+                <h3>💰 Budget Plans Recommendation</h3>
+                <p>Get tailored travel budgets based on your preferences and affordability.</p>
+            </div>
+        </div>
+    </section>
+
+    
+
+
+ 
+
+
+
+    
+    
+
+    <!-- Footer Section -->
+    <footer class="heritage-footer">
+        <p>&copy; 2025 Heritage Explorer | All Rights Reserved</p>
+    </footer>
+
+    
+</body>
+</html>
