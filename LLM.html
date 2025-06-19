@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Heritage Tourism Planner</title>
+  <style>
+  body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  color: #1F3C88;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/flash_heri.jpg'); /* Your image */
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  max-width: 700px;
+  width: 100%;
+  overflow-y: auto;
+  max-height: 90vh;
+  position: relative; /* to stay above the blurred background */
+}
+
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #10316B; /* Dark blue title */
+}
+
+#userInput {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 2px solid #1F3C88;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  padding: 12px 30px;
+  font-size: 16px;
+  background-color: #F26522; /* Orange button color from second image */
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #D35400;
+}
+
+#output {
+  margin-top: 25px;
+  padding: 20px;
+  background-color: #fff;
+  border: 2px solid #1F3C88;
+  border-radius: 8px;
+  white-space: normal;
+  font-size: 16px;
+  line-height: 1.5;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+#okBtn {
+  margin-top: 20px;
+  display: none;
+  background-color:  #F26522;
+  border-radius: 25px;
+}
+
+h2 {
+  color: #1F3C88;
+  margin-top: 20px;
+  border-bottom: 2px solid #1F3C88;
+  padding-bottom: 5px;
+}
+
+h3 {
+  color: #34495E;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+ol {
+  padding-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="searchSection">
+      <h1>Heritage Tourism Planner</h1>
+      <input type="text" id="userInput" placeholder="e.g. 2 days temple visit in Madurai" />
+      <button onclick="generatePlan()">Get Plan</button>
+    </div>
+
+    <div id="outputSection" style="display:none;">
+      <div id="output">Generating plan...</div>
+      <button id="okBtn" onclick="goBack()">OK</button>
+    </div>
+  </div>
+
+  <script>
+    async function generatePlan() {
+      const userInput = document.getElementById("userInput").value.trim();
+      const outputDiv = document.getElementById("output");
+      const okBtn = document.getElementById("okBtn");
+
+      if (!userInput) {
+        alert("Please enter your travel query.");
+        return;
+      }
+
+      document.getElementById("searchSection").style.display = "none";
+      document.getElementById("outputSection").style.display = "block";
+      outputDiv.innerHTML = "Generating plan...";
+      okBtn.style.display = "none";
+
+      const apiKey = "paste API key"; // Replace with your actual key here
+
+      try {
+        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer " + apiKey,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            model: "openai/gpt-3.5-turbo",
+            messages: [
+              {
+                role: "system",
+                content: `You are a heritage tourism planner bot. Generate detailed 2-day travel plans for users based on their input (e.g., "2 days temple visit in Madurai"). Include exact timing blocks (e.g., "8:00 AM - 9:30 AM: Visit Meenakshi Temple"), meals, and hotel suggestions. Use clear structure with:
+- Day headings
+- Time blocks
+- Activity description
+- Local food suggestions
+- Stay recommendations
+Use markdown formatting.`
+              },
+              { role: "user", content: userInput }
+            ]
+          })
+        });
+
+        if (!response.ok) {
+          // Try to parse error message properly
+          let errorText = "API request failed";
+          try {
+            const errorData = await response.json();
+            if (errorData.error) errorText = errorData.error;
+            else if (typeof errorData === 'string') errorText = errorData;
+          } catch {
+            // ignore parsing error
+          }
+          throw new Error(errorText);
+        }
+
+        const data = await response.json();
+
+        if (!data.choices || data.choices.length === 0) {
+          throw new Error("No response choices received from API");
+        }
+
+        const markdownText = data.choices[0].message.content;
+        const formattedHtml = markdownToHtml(markdownText);
+        outputDiv.innerHTML = formattedHtml;
+        okBtn.style.display = "block";
+      } catch (error) {
+        outputDiv.innerText = "Error: " + (error.message || error);
+        okBtn.style.display = "block";
+      }
+    }
+
+    function goBack() {
+      document.getElementById("searchSection").style.display = "block";
+      document.getElementById("outputSection").style.display = "none";
+      document.getElementById("userInput").value = "";
+    }
+
+    function markdownToHtml(md) {
+      let html = md;
+
+      // Convert Day headers
+      html = html.replace(/^Day\s*\d+.*$/gim, match => `<h2>${match.trim()}</h2>`);
+
+      // Time blocks like "8:00 AM - 9:30 AM:" into <h3>
+      html = html.replace(/^(\d{1,2}:\d{2}\s?(AM|PM)\s*-\s*\d{1,2}:\d{2}\s?(AM|PM)):?/gim, match => {
+        return `<h3>${match.trim()}</h3>`;
+      });
+
+      const lines = html.split('\n');
+      let result = '';
+      let inList = false;
+
+      lines.forEach(line => {
+        const trimmed = line.trim();
+
+        if (/^\d+\.\s/.test(trimmed)) {
+          if (!inList) {
+            inList = true;
+            result += '<ol>';
+          }
+          const item = trimmed.replace(/^\d+\.\s/, '');
+          result += `<li>${item}</li>`;
+        } else {
+          if (inList) {
+            result += '</ol>';
+            inList = false;
+          }
+
+          if (trimmed === '') {
+            result += '';
+          } else if (/^<h[23]>.*<\/h[23]>$/.test(trimmed)) {
+            result += trimmed;
+          } else {
+            result += `<p>${trimmed}</p>`;
+          }
+        }
+      });
+
+      if (inList) result += '</ol>';
+
+      return result;
+    }
+  </script>
+</body>
+</html>
